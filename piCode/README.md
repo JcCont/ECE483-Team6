@@ -11,3 +11,10 @@ Now we can run demo code
 Data sheets for all sensors and PI will also live in this part of the repo for quick check and access to all information need. 
 
 I plan on making a pdf documenting how to do all of this once full set up.
+
+10/14/2026
+
+Sensor up and running, demo could shows the values that the sensor is able to work and gives off RED and IR values constantly
+These values are going to be used to determine heart beat and oxygen as the next poriton for the demo. 
+After we are able to determine all that the last part will be to send data through bluetooth. 
+A pdf of the summary of how demo for the sensor was 

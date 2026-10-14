@@ -9,3 +9,6 @@ each of these folders should have a readme as well giving a more detailed explai
 
 10/14/2026: 
 Added a sample bluetooth (BLE) script I found to test raspberry pi's capability to trasnmit
+(12:19pm):
+updated the sensor demo code to test its usage, sensor is up and running. this is not the final demo one code, just for sensor testing.
+Added a pdf that explains the process used to setup sensor and run its demo, in case if we need to redo it.
