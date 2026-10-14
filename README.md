@@ -7,3 +7,5 @@ AppCode for app purposes
 each of these folders should have a readme as well giving a more detailed explaination of push for clarity sake.
 
 
+10/14/2026: 
+Added a sample bluetooth (BLE) script I found to test raspberry pi's capability to trasnmit
