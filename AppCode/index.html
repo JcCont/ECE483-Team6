@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Hydrometrics Heart Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="dropGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style="stop-color: var(--drop-top)" />
+          <stop offset="1" style="stop-color: var(--drop-bot)" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <main class="wrap">
+      <!-- HOME -->
+      <section class="page" id="p-home">
+        <header class="top">
+          <div class="brand">
+            <svg viewBox="0 0 16 20" aria-hidden="true">
+              <path
+                d="M8 1C6 5 1 9.5 1 13a7 7 0 0 0 14 0C15 9.5 10 5 8 1z"
+                fill="var(--calm)"
+              /></svg
+            >Hydrometrics
+          </div>
+          <div class="status">
+            <span class="dot" id="dot"></span
+            ><span id="statusText">Demo mode</span>
+          </div>
+        </header>
+        <div class="hello">
+          <h1 id="greet">Hi there!</h1>
+          <p class="sub">
+            <span class="mname">Dew</span> is here to cheer you on.
+          </p>
+        </div>
+
+        <div class="scene" id="scene">
+          <svg
+            class="scene-bg"
+            viewBox="0 0 400 300"
+            preserveAspectRatio="xMidYMax slice"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" class="s-sky-top" />
+                <stop offset="1" class="s-sky-bot" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#skyGrad)" />
+            <g class="s-stars" id="stars"></g>
+            <g id="sunG">
+              <circle class="s-sun" r="46" opacity=".25" />
+              <circle class="s-sun" r="26" />
+            </g>
+            <g id="moonG">
+              <circle class="s-sun" r="34" opacity=".18" />
+              <circle class="s-sun" r="20" />
+              <circle class="s-crater" cx="-6" cy="-4" r="4" />
+              <circle class="s-crater" cx="6" cy="6" r="3" />
+              <circle class="s-crater" cx="7" cy="-8" r="2" />
+            </g>
+            <g class="clouds">
+              <g class="s-cloud">
+                <ellipse cx="80" cy="70" rx="34" ry="13" />
+                <ellipse cx="100" cy="62" rx="22" ry="14" />
+                <ellipse cx="64" cy="66" rx="16" ry="10" />
+              </g>
+              <g class="s-cloud">
+                <ellipse cx="300" cy="96" rx="40" ry="14" />
+                <ellipse cx="322" cy="86" rx="24" ry="15" />
+                <ellipse cx="284" cy="90" rx="18" ry="11" />
+              </g>
+            </g>
+            <path
+              class="s-far"
+              d="M0 190 Q60 148 120 174 T240 166 T400 170 V300 H0Z"
+            />
+            <path
+              class="s-near"
+              d="M0 214 Q80 180 170 204 T330 197 Q370 190 400 199 V300 H0Z"
+            />
+            <path class="s-water" d="M0 228 Q200 216 400 228 V300 H0Z" />
+            <g class="s-shimmer">
+              <line x1="40" y1="240" x2="70" y2="240" />
+              <line x1="150" y1="246" x2="170" y2="246" />
+              <line x1="300" y1="238" x2="336" y2="238" />
+              <line x1="230" y1="252" x2="250" y2="252" />
+            </g>
+            <path class="s-ground" d="M0 264 Q200 240 400 264 V300 H0Z" />
+          </svg>
+          <div class="mascot">
+            <div class="bubble" id="bubble">
+              Hi, I'm Dew! Let's see how your heart is doing.
+            </div>
+            <div
+              id="dew"
+              class="dew"
+              data-mood="happy"
+              role="img"
+              aria-label="Dew, a smiling water droplet"
+            >
+              <img class="pose p-normal" alt="" /><img
+                class="pose p-jump"
+                alt=""
+              /><img class="pose p-thumbs" alt="" /><img
+                class="pose p-wink"
+                alt=""
+              /><svg class="zzz-o" viewBox="0 0 40 40" aria-hidden="true">
+                <text x="4" y="34" font-size="18">z</text>
+                <text x="20" y="18" font-size="13">z</text>
+              </svg>
+            </div>
+            <span class="dew-shadow" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="live-row">
+            <div>
+              <p class="label">Heart rate</p>
+              <div class="bpm"><b id="bpm">--</b><span>BPM</span></div>
+            </div>
+            <div class="live-right">
+              <svg
+                class="mini-heart"
+                id="miniHeart"
+                viewBox="0 0 24 22"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 21C5 15.5 1 12 1 7a5.5 5.5 0 0 1 11-1 5.5 5.5 0 0 1 11 1c0 5-4 8.5-11 14z"
+                />
+              </svg>
+              <span class="zone"
+                ><i id="zoneDot"></i><span id="zoneText">Resting</span></span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="card notice" id="notice" hidden>
+          <p id="noticeText"></p>
+        </div>
+
+        <div class="card">
+          <p class="label" id="pickLabel">Today's pick for you</p>
+          <div class="pick-row">
+            <div class="pick-badge"><b id="pickMin">20</b><span>min</span></div>
+            <div style="min-width: 0">
+              <h2 id="pickTitle">Recovery day</h2>
+              <p class="meta" id="pickMeta">Stretch &amp; yoga</p>
+            </div>
+          </div>
+          <p class="why" id="pickWhy"></p>
+          <p class="bonus" id="pickBonus" hidden></p>
+          <button class="primary wide" id="pickStart">
+            Start this workout
+          </button>
+        </div>
+
+        <div class="card">
+          <p class="label">How are you feeling?</p>
+          <div class="row chips" id="mood">
+            <button>Energized</button><button>Calm</button><button>Tired</button
+            ><button>Stressed</button>
+          </div>
+          <p class="note" id="moodReply">
+            A quick check-in helps you spot what affects your heart.
+          </p>
+        </div>
+      </section>
+
+      <!-- WORKOUTS -->
+      <section class="page" id="p-workouts" hidden>
+        <h1 class="ptitle">Workouts</h1>
+        <div class="card">
+          <div class="sess-head">
+            <div style="min-width: 0">
+              <p class="label" id="sessLabel">Ready when you are</p>
+              <h2 id="sessTitle">Pick a workout</h2>
+            </div>
+            <div class="timer" id="timer">0 min</div>
+          </div>
+          <canvas
+            id="chart"
+            aria-label="Heart rate over the last 60 seconds"
+          ></canvas>
+          <div class="row chips" id="typePick" style="margin-top: 12px"></div>
+          <div class="row" style="margin-top: 12px">
+            <button class="primary" id="sessBtn">Start workout</button>
+            <button id="easeBtn">Ease off</button>
+            <button id="pushBtn">Push harder</button>
+          </div>
+          <p class="small" id="speedNote">
+            Demo speed: each second counts as one minute, so a short demo shows
+            a full workout.
+          </p>
+        </div>
+        <div class="card">
+          <p class="label" id="statLabel">This workout</p>
+          <div class="stats">
+            <div class="stat"><b id="avg">--</b><span>average</span></div>
+            <div class="stat"><b id="low">--</b><span>lowest</span></div>
+            <div class="stat"><b id="high">--</b><span>highest</span></div>
+          </div>
+          <div class="zbar" id="zbar"></div>
+          <div class="zlegend">
+            <span><i style="background: var(--z1)"></i>Resting</span
+            ><span><i style="background: var(--z2)"></i>Light</span>
+            <span><i style="background: var(--z3)"></i>Moderate</span
+            ><span><i style="background: var(--z4)"></i>Vigorous</span>
+          </div>
+        </div>
+        <div class="card">
+          <p class="label">Past workouts</p>
+          <ul class="hist" id="hist"></ul>
+        </div>
+      </section>
+
+      <!-- PROGRESS -->
+      <section class="page" id="p-progress" hidden>
+        <h1 class="ptitle">Progress</h1>
+        <div class="card">
+          <p class="label">Your goals</p>
+          <div class="row" id="goalChips"></div>
+        </div>
+        <div class="card">
+          <p class="label">Last 7 days</p>
+          <div class="week" id="week"></div>
+          <p class="note" id="weekNote"></p>
+        </div>
+        <div class="card">
+          <p class="label">Active minutes</p>
+          <div class="bars" id="bars"></div>
+        </div>
+        <div class="card">
+          <p class="label">Milestones</p>
+          <div class="badges" id="badges"></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="page" id="p-settings" hidden>
+        <h1 class="ptitle">Settings</h1>
+
+        <div class="set-group">
+          <div class="set-list">
+            <div class="prof">
+              <div class="avatar" id="profAvatar">H</div>
+              <div style="min-width: 0; flex: 1">
+                <b class="prof-name" id="profName">Your profile</b
+                ><span class="prof-sub" id="profSum">Not set up yet</span>
+              </div>
+            </div>
+            <button class="set-row" id="redoBtn" type="button">
+              <span class="k"
+                >Edit profile<small>Retake the setup questions</small></span
+              ><svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <p class="set-foot" id="profCaution" hidden></p>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">Device</p>
+          <div class="set-list">
+            <div class="set-row">
+              <span class="k"
+                >Heart rate sensor<small
+                  >Hydrometrics HR · Bluetooth LE</small
+                ></span
+              ><span class="pill" id="sensorState">Demo mode</span>
+            </div>
+            <button class="set-row" id="connect" type="button">
+              <span class="k link">Connect sensor</span
+              ><svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <p class="set-foot" id="btHelp">
+            Demo mode uses simulated readings. To connect the Raspberry Pi, open
+            this file in Chrome or Edge on a laptop or Android phone.
+          </p>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">Health &amp; heart-rate zones</p>
+          <div class="set-list">
+            <div class="set-row">
+              <label class="k" for="age">Age</label
+              ><input
+                type="number"
+                id="age"
+                value="21"
+                min="10"
+                max="99"
+                class="set-in"
+                style="width: 80px; text-align: right"
+              />
+            </div>
+            <div class="set-row">
+              <span class="k"
+                >Estimated max heart rate<small>220 minus age</small></span
+              ><span class="v" id="maxText">199 BPM</span>
+            </div>
+            <div class="set-row">
+              <span class="k">Moderate zone<small>64–77% of max</small></span
+              ><span class="v" id="zoneMod">127–153 BPM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">Coaching</p>
+          <div class="set-list">
+            <form class="set-row" id="nameForm">
+              <label class="k" for="buddyName">Buddy name</label>
+              <span class="set-ctl"
+                ><input
+                  type="text"
+                  id="buddyName"
+                  maxlength="14"
+                  autocomplete="off"
+                  class="set-in"
+                  style="width: 120px"
+                /><button class="primary small-btn" type="submit">
+                  Save
+                </button></span
+              >
+            </form>
+            <div class="set-row">
+              <label class="k" for="setStyle">Encouragement style</label>
+              <select id="setStyle" class="set-in">
+                <option value="gentle">Gentle &amp; calm</option>
+                <option value="bubbly">Bright &amp; bubbly</option>
+                <option value="coach">Coach mode</option>
+              </select>
+            </div>
+            <div class="set-row">
+              <label class="k" for="setDays">Weekly goal</label>
+              <select id="setDays" class="set-in">
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+              </select>
+            </div>
+          </div>
+          <p class="set-foot" id="nameNote">Changes apply right away.</p>
+          <div id="nameIdeas" hidden></div>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">Appearance</p>
+          <div class="set-list">
+            <div class="set-row">
+              <label class="k" for="setScene"
+                >Background<small>The scene behind your buddy</small></label
+              >
+              <select id="setScene" class="set-in">
+                <option value="auto">Match time of day</option>
+                <option value="morning">Morning</option>
+                <option value="day">Daytime</option>
+                <option value="evening">Sunset</option>
+                <option value="night">Night</option>
+              </select>
+            </div>
+          </div>
+          <p class="set-foot">
+            "Match time of day" changes the sky, sun, and moon as the day goes
+            on.
+          </p>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">Data</p>
+          <div class="set-list">
+            <button class="set-row" id="resetBtn" type="button">
+              <span class="k"
+                >Reset example workouts<small
+                  >Restores the sample history used for suggestions</small
+                ></span
+              ><svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <p class="set-foot">
+            Your answers and buddy name are stored only on this device.
+          </p>
+        </div>
+
+        <div class="set-group">
+          <p class="set-h">About</p>
+          <div class="set-list">
+            <div class="set-row">
+              <span class="k">App</span
+              ><span class="v">Hydrometrics Heart Coach</span>
+            </div>
+            <div class="set-row">
+              <span class="k">Version</span><span class="v">0.1 · Demo 1</span>
+            </div>
+          </div>
+          <p class="set-foot">
+            For general wellness only. This app is not a medical device and does
+            not diagnose any condition. Talk to a doctor about health concerns.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabs" aria-label="Main">
+      <button data-p="home" aria-current="page">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"
+          /></svg
+        >Home
+      </button>
+      <button data-p="workouts">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4" /></svg
+        >Workouts
+      </button>
+      <button data-p="progress">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"
+          /></svg
+        >Progress
+      </button>
+      <button data-p="settings">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+          /></svg
+        >Settings
+      </button>
+    </nav>
+
+    <div class="onb" id="onb" hidden>
+      <div class="onb-inner">
+        <div class="onb-top">
+          <span id="onbCount">Step 1 of 9</span
+          ><button type="button" class="linkbtn" id="onbSkip">
+            Skip for now
+          </button>
+        </div>
+        <div class="onb-bar"><i id="onbBar"></i></div>
+        <div id="onbDew"></div>
+
+        <section class="step" data-s="0">
+          <h2>Hi! I'm your new heart buddy.</h2>
+          <p class="lead">
+            I'll ask a few quick questions so I can cheer you on in a way that
+            fits you. It takes about a minute.
+          </p>
+          <p class="q">What's your first name?</p>
+          <input
+            class="text-in"
+            id="oName"
+            maxlength="20"
+            placeholder="Your name (optional)"
+            autocomplete="given-name"
+          />
+        </section>
+
+        <section class="step" data-s="1" hidden>
+          <h2>What would you like to call me?</h2>
+          <p class="lead">You can change this anytime in Settings.</p>
+          <div class="opts" id="oBuddy">
+            <button type="button" data-v="Dew" class="on">Dew</button
+            ><button type="button" data-v="Drip">Drip</button
+            ><button type="button" data-v="Splash">Splash</button
+            ><button type="button" data-v="Misty">Misty</button
+            ><button type="button" data-v="Bubbles">Bubbles</button>
+          </div>
+          <input
+            class="text-in"
+            id="oBuddyIn"
+            maxlength="14"
+            placeholder="Or type your own name for me"
+            autocomplete="off"
+          />
+        </section>
+
+        <section class="step" data-s="2" hidden>
+          <h2 id="oAboutTitle">A little about you</h2>
+          <p class="q">How old are you?</p>
+          <input
+            class="text-in"
+            id="oAge"
+            type="number"
+            min="10"
+            max="99"
+            placeholder="e.g. 21"
+            style="max-width: 140px"
+          />
+          <p class="q">How active are you these days?</p>
+          <div class="opts cards" id="oActivity">
+            <button type="button" data-v="sitting">
+              Mostly sitting<small>Desk, class, or couch most of the day</small>
+            </button>
+            <button type="button" data-v="light" class="on">
+              A little active<small>Some walking and light chores</small>
+            </button>
+            <button type="button" data-v="active">
+              Pretty active<small>Exercise 2 to 3 times a week</small>
+            </button>
+            <button type="button" data-v="very">
+              Very active<small>Exercise most days</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="step" data-s="3" hidden>
+          <h2>Any of these apply to you?</h2>
+          <p class="lead">
+            This helps me keep my suggestions safe and comfortable. Your answers
+            stay on this device.
+          </p>
+          <div class="opts" id="oHealth" data-multi="1">
+            <button type="button" data-v="heart">Heart condition</button
+            ><button type="button" data-v="bp">High blood pressure</button>
+            <button type="button" data-v="asthma">Asthma</button
+            ><button type="button" data-v="diabetes">Diabetes</button>
+            <button type="button" data-v="pregnant">Pregnant</button
+            ><button type="button" data-v="joints">Joint pain or injury</button>
+            <button type="button" data-v="none">None of these</button>
+          </div>
+          <p class="q">
+            Do you take any medicine that affects your heart rate?
+          </p>
+          <div class="opts" id="oMeds">
+            <button type="button" data-v="no" class="on">No</button
+            ><button type="button" data-v="yes">Yes</button
+            ><button type="button" data-v="unsure">Not sure</button>
+          </div>
+        </section>
+
+        <section class="step" data-s="4" hidden>
+          <h2>What do you want from the app?</h2>
+          <p class="lead">Pick as many as you like.</p>
+          <div class="opts cards" id="oGoals" data-multi="1">
+            <button type="button" data-v="move">Move more every day</button
+            ><button type="button" data-v="endurance">Build endurance</button>
+            <button type="button" data-v="stress">Feel less stressed</button
+            ><button type="button" data-v="energy">Have more energy</button>
+            <button type="button" data-v="recover">Recover better</button
+            ><button type="button" data-v="habit">Build a healthy habit</button>
+          </div>
+        </section>
+
+        <section class="step" data-s="5" hidden>
+          <h2>What kinds of movement do you enjoy?</h2>
+          <p class="lead">I'll suggest these more often.</p>
+          <div class="opts" id="oLikes" data-multi="1">
+            <button type="button" data-v="walk">Walking</button
+            ><button type="button" data-v="jog">Jogging</button
+            ><button type="button" data-v="cycle">Biking</button>
+            <button type="button" data-v="stretch">Stretch &amp; yoga</button
+            ><button type="button" data-v="hiit">HIIT</button>
+          </div>
+        </section>
+
+        <section class="step" data-s="6" hidden>
+          <h2>Let's plan your week</h2>
+          <p class="q">How many active days a week feel doable?</p>
+          <div class="opts" id="oDays">
+            <button type="button" data-v="2">2 days</button
+            ><button type="button" data-v="3" class="on">3 days</button
+            ><button type="button" data-v="4">4 days</button
+            ><button type="button" data-v="5">5 days</button
+            ><button type="button" data-v="6">6 days</button>
+          </div>
+          <p class="q">When do you like to move?</p>
+          <div class="opts" id="oTime">
+            <button type="button" data-v="morning">Morning</button
+            ><button type="button" data-v="afternoon">Afternoon</button
+            ><button type="button" data-v="evening">Evening</button
+            ><button type="button" data-v="any" class="on">It changes</button>
+          </div>
+        </section>
+
+        <section class="step" data-s="7" hidden>
+          <h2>How should I cheer you on?</h2>
+          <div class="opts cards" id="oStyle">
+            <button type="button" data-v="gentle">
+              Gentle &amp; calm<small>Soft encouragement, no pressure</small>
+            </button>
+            <button type="button" data-v="bubbly" class="on">
+              Bright &amp; bubbly<small>Lots of cheering and celebrating</small>
+            </button>
+            <button type="button" data-v="coach">
+              Coach mode<small>A friendly push to keep going</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="step" data-s="8" hidden>
+          <h2 id="oDoneTitle">You're all set!</h2>
+          <p class="lead">
+            Here's what I'll keep in mind. You can update this anytime in
+            Settings.
+          </p>
+          <ul class="summary" id="oSummary"></ul>
+          <p class="caution" id="oCaution" hidden></p>
+        </section>
+
+        <p class="onb-err" id="onbErr" hidden></p>
+        <div class="onb-foot">
+          <button type="button" id="onbBack" hidden>Back</button
+          ><button type="button" class="primary" id="onbNext">Let's go</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
